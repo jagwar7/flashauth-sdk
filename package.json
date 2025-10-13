@@ -1,0 +1,21 @@
+{
+  "name": "flashauth-sdk",
+  "version": "1.0.0",
+  "description": "A TypeScript-based SDK for FlashAuth authentication, including FlashAuthClient for Google and GitHub sign-ins",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "clean": "rmdir /s /q dist && mkdir dist"
+  },
+  "author": "Your Name or Handle",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "firebase": "^12.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

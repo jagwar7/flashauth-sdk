@@ -1,23 +1,20 @@
 import { GetGoogleLoginURL, FetchUserProfile } from "./utils/API";
-import {} from "../src/utils/Storage"
+import Storage from "./utils/Storage";
 
 
 class FlashAuthClient {
-  private clientId: string = "62670"; // Matches usercredentials clientPublicKey
+  private clientId: string = ""; 
   private serverURL: string = "http://localhost:5900";
 
-  constructor(clientId?: string) {
-    if (clientId) {
-      this.clientId = clientId;
-      console.log(`FlashAuthClient: Overriding clientId to ${this.clientId}`);
-    } else {
-      console.log(`FlashAuthClient: Using default clientId ${this.clientId}`);
-    }
+  constructor(clientId: string) {
+    this.clientId = clientId;
+
     if (!this.clientId) {
       throw new Error("FlashAuth: clientId is required");
     }
-    console.log(`FlashAuthClient initialized with clientId: ${this.clientId}`);
   }
+
+
 
   #openPopup(url: string, name = "FlashAuth", width = 500, height = 600) {
     const left = window.screenX + (window.outerWidth - width) / 2;
@@ -25,9 +22,8 @@ class FlashAuthClient {
     return window.open(url, name, `width=${width},height=${height},left=${left},top=${top}`);
   }
 
-  async SignInWithProvider(provider: string = "google"): Promise<any> {
+  async SignInWithProvider(provider:string): Promise<any> {
     try {
-      console.log(`FlashAuthClient: Signing in with provider ${provider}, clientId: ${this.clientId}`);
       let url;
       switch (provider.toLowerCase()) {
         case "google":
@@ -35,6 +31,8 @@ class FlashAuthClient {
           break;
         case "github":
           throw new Error("GitHub login not implemented yet");
+        case "local":
+
         default:
           throw new Error(`Unsupported provider: ${provider}`);
       }
@@ -59,8 +57,11 @@ class FlashAuthClient {
           }
         };
 
+
+        // CALL WINDOW EVENT LISTNER
         window.addEventListener("message", popupEventResponse);
 
+        // CHECK IF POPUP CLOSED AFTER 500ms INTERVAL
         const checkPopup = setInterval(() => {
           if (popup.closed) {
             clearInterval(checkPopup);
@@ -84,7 +85,7 @@ class FlashAuthClient {
   }
 
   async SignUpWithJWT(name: string, email: string, password: string) {
-    throw new Error("SignUpWithJWT not implemented yet");
+  //  return this.SignInWithProvider("local");
   }
 
   async LoginWithJWT(email: string, password: string) {
