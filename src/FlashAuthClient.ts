@@ -1,9 +1,10 @@
-import { GetGoogleLoginURL, FetchUserProfile } from "./utils/API";
+import { FetchProfile, GetGoogleLoginURL, SingInWithJWT } from "./APIs/API";
+
 import Storage from "./utils/Storage";
 
 
 class FlashAuthClient {
-  private clientId: string = ""; 
+  private clientId: string = "62670"; 
   private serverURL: string = "http://localhost:5900";
 
   constructor(clientId: string) {
@@ -15,16 +16,19 @@ class FlashAuthClient {
   }
 
 
-
+  // POP INFO-------------------------------------------------------------------------------------
   #openPopup(url: string, name = "FlashAuth", width = 500, height = 600) {
     const left = window.screenX + (window.outerWidth - width) / 2;
     const top = window.screenY + (window.outerHeight - height) / 2;
     return window.open(url, name, `width=${width},height=${height},left=${left},top=${top}`);
   }
+  //----------------------------------------------------------------------------------------------
 
+
+  
   async SignInWithProvider(provider:string): Promise<any> {
     try {
-      let url;
+      let url;  
       switch (provider.toLowerCase()) {
         case "google":
           url = await GetGoogleLoginURL(this.serverURL, this.clientId);
@@ -83,6 +87,11 @@ class FlashAuthClient {
   async LoginWithGithub() {
     return this.SignInWithProvider("github");
   }
+
+  async FetchUserProfile(token:string, provider:string){
+    await FetchProfile(this.serverURL, this.clientId, provider, token);
+  }
+
 
   async SignUpWithJWT(name: string, email: string, password: string) {
   //  return this.SignInWithProvider("local");
