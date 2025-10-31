@@ -1,4 +1,4 @@
-import { IOAuthPopupManager , AuthMessage, } from "../Interfaces/IOAuthPopupManager";
+import { IOAuthPopupManager , } from "../Interfaces/IOAuthPopupManager";
 
 export default class OAuthPopupManager implements IOAuthPopupManager{
     
@@ -16,11 +16,11 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
             const data = event.data;
             if (data.type === "FLASHAUTH_TOKEN" && data.token) {
                 window.removeEventListener("message", popupEventResponse);
-                popup.close();
+                // popup.close();
                 resolve(data.token);
             } else if (data.type === "FLASHAUTH_ERROR") {
                 window.removeEventListener("message", popupEventResponse);
-                popup.close();
+                // popup.close();
                 reject(new Error(data.error || "Authentication Failed"));
             }
             };

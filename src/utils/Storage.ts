@@ -2,7 +2,7 @@
 const Storage = {
     Set(token: string) {
         try {
-            const providerKey = `flashauth_token`;
+            const providerKey = `FLASHAUTH_TOKEN`;
             localStorage.setItem(providerKey, token);
         }
         catch (err) {
@@ -13,7 +13,7 @@ const Storage = {
 
     Get(): string | null {
         try {
-            const providerKey = `flashauth_token`;
+            const providerKey = `FLASHAUTH_TOKEN`;
             return localStorage.getItem(providerKey);
         }
         catch (err) {
@@ -25,7 +25,7 @@ const Storage = {
 
     Remove() {
         try {
-            const providerKey = `flashauth_token`;
+            const providerKey = `FLASHAUTH_TOKEN`;
             localStorage.removeItem(providerKey);
         }
         catch (err) {

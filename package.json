@@ -1,21 +1,49 @@
 {
-  "name": "flashauth-sdk",
+  "name": "flashauthbyjagwar",
   "version": "1.0.0",
-  "description": "A TypeScript-based SDK for FlashAuth authentication, including FlashAuthClient for Google and GitHub sign-ins",
+  "description": "A TypeScript-based SDK for FlashAuth authentication, including FlashAuthClient for Google and GitHub sign-ins.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "npx tsc",
-    "watch": "npx tsc --watch",
-    "clean": "rmdir /s /q dist && mkdir dist"
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "clean": "rimraf dist"
   },
-  "author": "Your Name or Handle",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jagwar7/flashauth-sdk.git"
+  },
+  "keywords": [
+    "flashauth",
+    "authentication",
+    "sdk",
+    "firebase",
+    "google-signin",
+    "typescript",
+    "javascript"
+  ],
+  "author": {
+    "name": "Jagwar",
+    "url": "https://github.com/jagwar7"
+  },
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jagwar7/flashauth-sdk/issues"
+  },
+  "homepage": "https://github.com/jagwar7/flashauth-sdk#readme",
   "dependencies": {
     "axios": "^1.12.2",
     "firebase": "^12.1.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.2"
-  }
+    "typescript": "^5.9.2",
+    "rimraf": "^6.0.1"
+  },
+  "private": false
 }

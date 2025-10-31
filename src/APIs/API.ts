@@ -1,5 +1,4 @@
 import axios, {AxiosResponse} from "axios";
-import Storage from "../utils/Storage";
 
 interface UserData{
   success: boolean,
@@ -8,7 +7,11 @@ interface UserData{
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------------------------------
+
+//=============================================================================================================================================
+//                                                       GOOGLE AUTH APIs
+//=============================================================================================================================================
+
 export async function GetGoogleLoginURL(serverURL: string, clientId: string): Promise<string> {
   if(!clientId || !serverURL){
     throw new Error("Missing client ID or server url");
@@ -38,7 +41,10 @@ export async function GetGoogleLoginURL(serverURL: string, clientId: string): Pr
     throw err;
   }
 }
-//---------------------------------------------------------------------------------------------------------------------------------------------
+
+//=============================================================================================================================================
+//                                                       GOOGLE AUTH APIs
+//=============================================================================================================================================
 
 
 
@@ -46,32 +52,10 @@ export async function GetGoogleLoginURL(serverURL: string, clientId: string): Pr
 
 
 
-// //  FETCH USER'S PROFILE----------------------------------------------------------------------------------------------------------------------
-// export async function FetchUserProfile(serverURL: string, token: string): Promise<UserProfile> {
-//   try {
-//     const res = await fetch(`${serverURL}/api/auth/profile`, {
-//       headers: { Authorization: `Bearer ${token}` },
-//     });
-//     if (!res.ok) throw new Error("Failed to fetch profile");
-//     return await res.json();
-//   } catch (err) {
-//     console.error("FlashAuth API Error:", err);
-//     throw err;
-//   }
-// }
-//---------------------------------------------------------------------------------------------------------------------------------------------
+//=============================================================================================================================================
+//                                                       JWT AUTH APIs
+//=============================================================================================================================================
 
-
-
-
-
-
-
-
-
-
-
-// SIGN UP WITH JWT API------------------------------------------------------------------------------------------------------------------------
 export async function SignUpWithJWT(serverURL: string, clientId: string, name: string, email: string, password: string): Promise<string>{
   if(!serverURL || !clientId || !name || !email || !password){
     throw new Error("All the fields are required");
@@ -93,6 +77,9 @@ export async function SignUpWithJWT(serverURL: string, clientId: string, name: s
     throw new Error("There is an error with sign up");
   }
 }
+
+
+
 
 export async function SingInWithJWT(serverURL: string, clientId: string, email:string, password:string){
   const proivder = 'local';
@@ -120,8 +107,9 @@ export async function SingInWithJWT(serverURL: string, clientId: string, email:s
     throw new Error("There is a problem while signing in");
   }
 }
-//--------------------------------------------------------------------------------------------------------------------------------------------
-
+//=============================================================================================================================================
+//                                                       JWT AUTH APIs
+//=============================================================================================================================================
 
 
 
@@ -129,7 +117,7 @@ export async function SingInWithJWT(serverURL: string, clientId: string, email:s
 
 
 //  FETCH PROFILE API-------------------------------------------------------------------------------------------------------------------------
-export async function FetchProfile(serverURL: string, clientId: string, provider: string, token: string) {
+export async function FetchProfile(serverURL: string, clientId: string, token: string) {
     if(!serverURL || !clientId || !token){
       throw new Error("All the fields are required");
     }
@@ -139,7 +127,7 @@ export async function FetchProfile(serverURL: string, clientId: string, provider
         headers: {
           'Content-Type' : 'application/json',
           'X-Client-Id' : clientId,
-          Authorization: `${provider}:${token}`
+          Authorization: `Bearer:${token}`
         }
       });
 
@@ -147,9 +135,7 @@ export async function FetchProfile(serverURL: string, clientId: string, provider
         return userResponse.data.message;
       }
 
-
       return userResponse.data;
-
     } catch (error) {
         throw new Error("There is an error with Fetching user profile");
     }
