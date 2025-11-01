@@ -39,11 +39,12 @@
   "homepage": "https://github.com/jagwar7/flashauth-sdk#readme",
   "dependencies": {
     "axios": "^1.12.2",
-    "firebase": "^12.1.0"
+    "firebase": "^12.1.0",
+    "jwt-decode": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.2",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2"
   },
   "private": false
 }
