@@ -1,10 +1,4 @@
-import axios, {AxiosResponse} from "axios";
 
-interface UserData{
-  success: boolean,
-  message: string, 
-  data: any;
-}
 
 
 
@@ -63,16 +57,20 @@ export async function SignUpWithJWT(serverURL: string, clientId: string, name: s
 
   try {
     const payload = {
-      name, email, password
+      name, email, password, authType: 'local'
     }
-    const res: AxiosResponse<string> = await axios.post(`${serverURL}/api/flashauth/local/signup`, payload, {
-      headers: {
+    const url = `${serverURL}/api/flashauth/local/signup`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers : {
         'Content-Type' : 'application/json',
-        'X-Client-Id' : clientId
-      }
+        'X-Client-Id'  : clientId
+      },
+      body : JSON.stringify(payload)
     });
-    
-    return res.data;
+
+    const data = await res.json();
+    return data;
   } catch (error) {
     throw new Error("There is an error with sign up");
   }
@@ -123,19 +121,17 @@ export async function FetchProfile(serverURL: string, clientId: string, token: s
     }
 
     try {
-      const userResponse: AxiosResponse<UserData> = await axios.get(`${serverURL}/api/flashauth/fetch/profile`, {
+      const url = `${serverURL}/api/flashauth/fetch/profile`;
+      const res = await fetch(url, {
+        method: 'GET',
         headers: {
           'Content-Type' : 'application/json',
-          'X-Client-Id' : clientId,
-          Authorization: `Bearer:${token}`
+          'X-Client-Id'  : clientId,
+          'Authorization': `Bearer:${token}`
         }
       });
-
-      if(userResponse.data.success == false){
-        return userResponse.data.message;
-      }
-
-      return userResponse.data;
+      const data = await res.json();
+      return data.data;
     } catch (error) {
         throw new Error("There is an error with Fetching user profile");
     }

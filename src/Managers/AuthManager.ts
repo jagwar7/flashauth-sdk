@@ -30,7 +30,7 @@ export default class AuthManager{
         try {
             const googleProvider = new GoogleAuthProvider();
             const url = await googleProvider.GetLoginURL(this.ClientId, this.ServerURL);
-
+            
             const popup = this.OAuthPopupManager.openPopupURL(url, "GoogleAuth", 500, 600);
             if(!popup) throw new Error("FlashAuth: Popup blocked by browser");
 
