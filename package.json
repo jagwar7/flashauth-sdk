@@ -1,6 +1,6 @@
 {
   "name": "flashauthbyjagwar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An authentication SDK for your React site. No need to write auth logic — just create an account at flashauth.connectjagwar.com to get started.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
