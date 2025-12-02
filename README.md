@@ -1,3 +1,4 @@
+```text
 +----------------------+     +-----------------------------------+
 | User Triggers Auth   |     | FlashAuth SDK Captures           |
 | in React App         |---->| Credentials                      |
@@ -65,3 +66,4 @@
                                     |                  |
                                     +------------------+
                                    Optional: Retry Flow
+```
