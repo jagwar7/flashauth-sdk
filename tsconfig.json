@@ -1,31 +1,28 @@
-{
-  "compilerOptions": {
-    /* === Output === */
-    "outDir": "dist",
-    "rootDir": "src",
-    "declaration": true,
-    "removeComments": true,
-    "sourceMap": false,
+  {
+    "compilerOptions": {
+      "outDir": "dist",
+      "rootDir": "src",
+      "declaration": true,
+      "removeComments": true,
+      "sourceMap": false,
 
-    /* === Language & Module Target === */
-    "target": "ES2019",
-    "module": "ESNext",
-    "moduleResolution": "node",
+      "target": "ES2019",
+      "module": "nodenext",
+      "moduleResolution": "nodenext",
 
-    /* === Strictness & Compatibility === */
-    "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "declarationMap": true,
-    "allowJs": false,
+      "strict": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "declarationMap": true,
+      "allowJs": false,
 
 
 
-    /* === Libraries === */
-    "lib": ["ES2019", "DOM"]
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "test"]
-}
+      /* === Libraries === */
+      "lib": ["ES2019", "DOM"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist", "test"]
+  }
