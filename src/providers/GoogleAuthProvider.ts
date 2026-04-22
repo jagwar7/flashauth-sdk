@@ -1,4 +1,5 @@
 import { GetGoogleLoginURL } from "../APIs/API";
+import { IOAuthProvider } from "../Interfaces/IOAuthProvider";
 
 
 export default class GoogleAuthProvider implements IOAuthProvider{

@@ -27,10 +27,8 @@ export async function GetGoogleLoginURL(serverURL: string, clientId: string): Pr
     }
 
     const data = await res.json();
-    if(data.success == false){
-      throw new Error('Failed to get login URL, Contact Admin');
-    }
-    return data.url;
+    console.log(data.data.url);
+    return data.data.url;
   } catch (err) {
     throw err;
   }

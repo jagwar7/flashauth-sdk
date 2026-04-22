@@ -1,12 +1,12 @@
 
-import { FetchProfile } from "./APIs/API";
-import AuthManager from "./Managers/AuthManager";
-import Storage from "./utils/Storage";
+import { FetchProfile } from "./APIs/API.js";
+import AuthManager from "./Managers/AuthManager.js";
+import Storage from "./utils/Storage.js";
 import {jwtDecode} from 'jwt-decode';
 
 class FlashAuthClient{
   private clientId : string;
-  private serverURL : string ="https://jagwar-flash-auth.onrender.com";
+  private serverURL : string ="https://jagwar-flash-auth-v2.onrender.com";
   private authManager: AuthManager;
 
 
@@ -19,7 +19,7 @@ class FlashAuthClient{
 
       this.clientId = clientId;
       this.authManager = new AuthManager(this.clientId, this.serverURL);
-      this.serverURL = "https://jagwar-flash-auth.onrender.com";
+      this.serverURL = "https://jagwar-flash-auth-v2.onrender.com";
       this.checkTokenExpiry();
     } catch (error) {
       console.log("Flash Auth: Initialization error", error);
@@ -81,7 +81,7 @@ class FlashAuthClient{
       Storage.Remove();
       window.location.reload();
     } catch (error) {
-      throw error;
+      alert("Auth token doesnt exist");
     }
   }
   // SIGN OUT AND REFRESH----------------------------------------- 
