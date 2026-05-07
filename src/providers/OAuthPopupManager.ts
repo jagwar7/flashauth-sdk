@@ -8,35 +8,46 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
         return window.open(url, name, `width=${width},height=${height},left=${left},top=${top}`);
     }
 
+
+
+
     async handleAuthResponse(popup: Window, serverURL: string): Promise<string> {
-         return await new Promise((resolve, reject) => {
-            const popupEventResponse = (event: MessageEvent) => {
+    return new Promise((resolve, reject) => {
+        let checkPopup: ReturnType<typeof setInterval>;
+
+        // CLEANUP INTERVAL
+        const cleanup = () => {
+            clearInterval(checkPopup);
+            window.removeEventListener("message", popupEventResponse);
+        };
+
+
+        const popupEventResponse = (event: MessageEvent) => {
+            // CHECK HIT ORIGIN 
             if (event.origin !== serverURL.replace(/\/$/, "")) return;
 
             const data = event.data;
+
             if (data.type === "FLASHAUTH_TOKEN" && data.token) {
-                window.removeEventListener("message", popupEventResponse);
-                // popup.close();
+                cleanup(); // Stop the timer immediately!
                 resolve(data.token);
             } else if (data.type === "FLASHAUTH_ERROR") {
-                window.removeEventListener("message", popupEventResponse);
-                // popup.close();
+                cleanup(); // Stop the timer immediately!
                 reject(new Error(data.error || "Authentication Failed"));
             }
-            };
+        };
 
+        window.addEventListener("message", popupEventResponse);
 
-            // CALL WINDOW EVENT LISTNER, 
-            window.addEventListener("message", popupEventResponse);
-
-            // CHECK IF POPUP CLOSED AFTER 500ms INTERVAL 
-            const checkPopup = setInterval(() => {
+        checkPopup = setInterval(() => {
             if (popup.closed) {
-                clearInterval(checkPopup);
-                window.removeEventListener("message", popupEventResponse);
+                cleanup();
                 reject(new Error("FlashAuth: Popup closed by user"));
             }
-            }, 500);
-        });
-    }
+        }, 500);
+    });
+}
+
+
+    
 }
