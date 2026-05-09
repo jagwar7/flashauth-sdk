@@ -52,7 +52,7 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
         checkPopup = setInterval(() => {
             if (popup.closed) {
                 cleanup();
-                reject(new Error("FlashAuth: Popup closed by user"));
+                reject(new Error("FlashAuth: Popup closed by user #1"));
             }
         }, 500);
     });
