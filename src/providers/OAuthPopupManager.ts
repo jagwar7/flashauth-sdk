@@ -23,7 +23,7 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
 
 
         const popupEventResponse = (event: MessageEvent) => {
-            console.log("ENTERED EVENT BLOCK  ");
+            console.log("ENTERED EVENT BLOCK: ");
             console.log("Event Origin: ", event.origin);
             console.log("Event Data: ", event.data);
 
