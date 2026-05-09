@@ -23,14 +23,19 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
 
 
         const popupEventResponse = (event: MessageEvent) => {
+            console.log("Event Origin: ", event.origin);
+            console.log("Event Data: ", event.data);
+
+
+            const data = event.data;
+            
+            console.log("DATA TYPE: ",data.type);
+            console.log("DATA TOKEN",data.token);
+
             // CHECK HIT ORIGIN 
             if (event.origin !== serverURL.replace(/\/$/, "")) return;
 
-            const data = event.data;
-            console.log("Event Origin: ", event.origin);
-            console.log("Event Data: ", event.data);
-            console.log("DATA TYPE: ",data.type);
-            console.log("DATA TOKEN",data.token);
+
 
             if (data.type === "FLASHAUTH_TOKEN" && data.token) {
                 cleanup(); // Stop the timer immediately!
