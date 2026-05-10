@@ -49,7 +49,7 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
 
         window.addEventListener("message", popupEventResponse);
         const startTime = Date.now();
-        
+/*        
         checkPopup = setInterval(() => {
             try{
                 if(Date.now()- startTime < 4000){
@@ -65,6 +65,7 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
             }
         }, 500)
     });
+*/
 }
 
 
