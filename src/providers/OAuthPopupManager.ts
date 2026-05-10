@@ -35,7 +35,8 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
             console.log("DATA TOKEN",data.token);
 
             // CHECK HIT ORIGIN 
-            if (event.origin !== serverURL.replace(/\/$/, "")) return;
+            // if (event.origin !== serverURL.replace(/\/$/, "")) return;
+            console.log("EVENT LOG: ", event);
 
 
 
