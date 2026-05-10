@@ -48,10 +48,11 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
         };
 
         window.addEventListener("message", popupEventResponse);
-        const startTime  Date.now();
+        const startTime = Date.now();
+        
         checkPopup = setInterval(() => {
             try{
-                if(Date.now()-startTime < 4000){
+                if(Date.now()- startTime < 4000){
                     console.log("closed under 4 Sec");
                     return;
                 }
@@ -60,8 +61,9 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
                     reject(new Error("FlashAuth: Popup closed by user #1"));
                 }
             }catch(e){
-                console.warn("Popup status temporarily unreachable due to cross-origin redirect."
-        }, 500);
+                console.warn("Popup status temporarily unreachable due to cross-origin redirect.");
+            }
+        }, 500)
     });
 }
 
