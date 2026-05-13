@@ -5,7 +5,8 @@ export default class OAuthPopupManager implements IOAuthPopupManager{
     openPopupURL(url: string, name: "Flash Auth", width: 500, height: 600): Window | null {
         const left = window.screenX + (window.outerWidth - width) / 2;
         const top = window.screenY + (window.outerHeight - height) / 2;
-        return window.open(url, name, `width=${width},height=${height},left=${left},top=${top}`);
+        const windowFeatures = `width=${width},height=${height},left=${left},top=${top}`;
+        return window.open(url, name, windowFeatures);
     }
 
 
